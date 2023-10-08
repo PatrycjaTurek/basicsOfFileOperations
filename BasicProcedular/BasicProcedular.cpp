@@ -107,7 +107,6 @@ void madeFile(std::string fileName)
     }
     newData ="";
     getline(myFile, newData);
-    myFile.();
 // since we didnt change position in input sequence, it should be still on the end of file, so we dont use file.seekg(0, ios_base::end);
     myFile << newData;
 
@@ -128,7 +127,7 @@ int main()
         wholeData.pop_back();
     }
 
-    if(copyFile("basicFile.txt", "../CopiedFiles","CHUJ.txt"))
+    if(copyFile("basicFile.txt", "../CopiedFiles","newfile.txt"))
     {
         std::cout << " error occured during copying file\n";
         Sleep(1000); //to be able to see error
