@@ -4,7 +4,7 @@
 void readData(std::string fileName, std::vector<std::string> &dataVector)
 {
     std::ifstream myFile;
-    myFile.open(fileName, std::ios::in); // file with name fileName, read only
+    myFile.open(fileName); // file with name fileName, read only
     if (!myFile.is_open())
     {
         return;
@@ -17,7 +17,6 @@ void readData(std::string fileName, std::vector<std::string> &dataVector)
        dataVector.push_back(tmpString);
     }
     myFile.close();
-    int i;
 };
 
 void writeData(std::string fileName, std::vector<std::string>& dataVector)
@@ -83,11 +82,44 @@ bool copyFile(std::string originalFileName, std::string dirName) // polymorphism
     return false;
 }
 
+void madeFile(std::string fileName)
+{
+    std::fstream myFile;
+    myFile.open(fileName, std::ios::in | std::ios::out); // create file with name fileName, read and write
+    if (!myFile.is_open())
+    {
+        return;
+    }
+
+    std::string newData = {"There was no file with this name so deafult data was added."};
+    myFile << newData;
+
+    //it's still small so I will repeat last 10 characters
+    int x = 30; //how many character from end of file we weill repaeat
+    int howmanyBack = newData.size() - x;
+    if (howmanyBack<0)
+    {
+        myFile.seekp(0);
+    }
+    else
+    {
+        myFile.seekg(howmanyBack); // set position in output sequence 
+    }
+    newData ="";
+    getline(myFile, newData);
+    myFile.();
+// since we didnt change position in input sequence, it should be still on the end of file, so we dont use file.seekg(0, ios_base::end);
+    myFile << newData;
+
+    myFile.close();
+}
+
 int main()
 {
     std::vector<std::string> wholeData;
     wholeData.clear();
 
+    madeFile("basicFile.txt");
     readData("basicFile.txt", wholeData);
     writeData("basicFileRewrited.txt", wholeData);
     
